@@ -38,9 +38,25 @@ const MORSE_TABLE = {
 };
 
 function decode(expr) {
-    // write your solution here
+    let answer = '';
+    for (let i = 0; i < expr.length; i += 10) {
+        let letter = expr.slice(i, i + 10);
+        if (letter === '**********') {
+            answer += ' ';
+        } else {
+            letter = letter.replace(/00/g, '').replace(/10/g, '.').replace(/11/g, '-');
+            answer += MORSE_TABLE[letter];
+        }
+    }
+    return answer;
 }
 
 module.exports = {
     decode
 }
+
+// This function uses the MORSE_TABLE to map the encoded Morse code strings to their corresponding
+// letters and numbers. It then iterates through the input string, decoding each letter by converting
+// the 0s and 1s into dots and dashes, and then looking up the corresponding letter in the MORSE_TABLE.
+// If the letter is a space, it is added directly to the result. Otherwise, the decoded letter is added
+// to the result. The function returns the final decoded string.
